@@ -1,4 +1,4 @@
-package dev.zhelezov.car_parts_shop;
+package dev.zhelezov.carpartsshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

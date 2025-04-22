@@ -11,7 +11,7 @@
 	<groupId>dev.zhelezov</groupId>
 	<artifactId>car-parts-shop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>car-parts-shop</name>
+	<name>carpartsshop</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

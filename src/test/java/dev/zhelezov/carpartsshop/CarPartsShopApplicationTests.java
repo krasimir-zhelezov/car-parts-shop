@@ -1,4 +1,4 @@
-package dev.zhelezov.car_parts_shop;
+package dev.zhelezov.carpartsshop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
