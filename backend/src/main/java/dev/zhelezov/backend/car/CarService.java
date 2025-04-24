@@ -31,4 +31,13 @@ public class CarService {
     public Optional<Car> getCarById(UUID id) {
         return carRepository.findById(id);
     }
+
+    public boolean deleteCarById(UUID id) {
+        if (carRepository.existsById(id)) {
+            carRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
+    }
 }

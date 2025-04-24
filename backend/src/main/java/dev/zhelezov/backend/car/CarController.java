@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,13 +43,7 @@ public class CarController {
         List<Car> cars = carService.getAllCars();
         return ResponseEntity.status(HttpStatus.OK).body(cars);
     }
-    
-    @PostMapping("/")
-    public ResponseEntity<Car> createCar(@Valid @RequestBody CarCreateDto carCreateDto) {
-        Car car = carService.createCar(carCreateDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(car);
-    }
-    
+
     @GetMapping("/{id}")
     @Operation(summary = "Get car by id")
     @ApiResponses({
@@ -60,4 +56,23 @@ public class CarController {
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
+    @PostMapping("/")
+    public ResponseEntity<Car> createCar(@Valid @RequestBody CarCreateDto carCreateDto) {
+        Car car = carService.createCar(carCreateDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(car);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete car by id")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Car deleted"),
+        @ApiResponse(responseCode = "404", description = "Car not found")
+    })
+    public ResponseEntity<Void> deleteCarById(@PathVariable UUID id) {
+        if (carService.deleteCarById(id)) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 }
