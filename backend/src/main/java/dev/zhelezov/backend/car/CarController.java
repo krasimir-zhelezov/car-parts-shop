@@ -1,16 +1,15 @@
 package dev.zhelezov.backend.car;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +59,11 @@ public class CarController {
     public ResponseEntity<Car> createCar(@Valid @RequestBody CarCreateDto carCreateDto) {
         Car car = carService.createCar(carCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(car);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Car> updateCarById(@PathVariable UUID id, @RequestBody CarUpdateDto carUpdateDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.updateCarById(id, carUpdateDto));
     }
 
     @DeleteMapping("/{id}")

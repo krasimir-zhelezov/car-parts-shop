@@ -40,4 +40,13 @@ public class CarService {
 
         return false;
     }
+
+    public Car updateCarById(UUID id, CarUpdateDto carDto) {
+        Car car = carRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Car not found"));
+
+        modelMapper.map(carDto, car);
+
+        return carRepository.save(car);
+    }
 }
