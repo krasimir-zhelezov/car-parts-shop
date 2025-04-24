@@ -1,10 +1,11 @@
-package dev.zhelezov.carpartsshop.part;
+package dev.zhelezov.backend.part;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import dev.zhelezov.carpartsshop.car.Car;
-import dev.zhelezov.carpartsshop.manufacturer.Manufacturer;
+
+import dev.zhelezov.backend.car.Car;
+import dev.zhelezov.backend.manufacturer.Manufacturer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

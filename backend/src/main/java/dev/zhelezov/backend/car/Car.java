@@ -1,4 +1,4 @@
-package dev.zhelezov.carpartsshop.car;
+package dev.zhelezov.backend.car;
 
 import java.util.UUID;
 

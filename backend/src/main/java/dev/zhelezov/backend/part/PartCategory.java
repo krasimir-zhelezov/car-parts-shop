@@ -1,4 +1,4 @@
-package dev.zhelezov.carpartsshop.part;
+package dev.zhelezov.backend.part;
 
 public enum PartCategory {
     ENGINE,

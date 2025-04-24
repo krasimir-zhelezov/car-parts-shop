@@ -1,9 +1,10 @@
-package dev.zhelezov.carpartsshop.manufacturer;
+package dev.zhelezov.backend.manufacturer;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import dev.zhelezov.carpartsshop.part.Part;
+
+import dev.zhelezov.backend.part.Part;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
