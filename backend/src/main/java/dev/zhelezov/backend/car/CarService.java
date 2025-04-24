@@ -1,6 +1,8 @@
 package dev.zhelezov.backend.car;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,9 @@ public class CarService {
         Car car = modelMapper.map(carCreateDto, Car.class);
 
         return carRepository.save(car);
+    }
+    
+    public Optional<Car> getCarById(UUID id) {
+        return carRepository.findById(id);
     }
 }
