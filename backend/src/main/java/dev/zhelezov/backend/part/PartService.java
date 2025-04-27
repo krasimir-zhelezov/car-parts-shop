@@ -39,4 +39,13 @@ public class PartService {
 
         return false;
     }
+
+    public Part updatePartById(UUID id, PartUpdateDto dto) {
+        return partRepository.findById(id)
+        .map(part -> {
+            modelMapper.map(dto, part);
+            return partRepository.save(part);
+        })
+        .orElse(null);
+    }
 }
