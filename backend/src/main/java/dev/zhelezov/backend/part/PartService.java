@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PartService {
-    
+
     private final PartRepository partRepository;
     private final ModelMapper modelMapper;
 
@@ -29,5 +29,14 @@ public class PartService {
 
     public Optional<Part> getPartById(UUID id) {
         return partRepository.findById(id);
+    }
+
+    public boolean deleteCarById(UUID id) {
+        if (partRepository.existsById(id)) {
+            partRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
     }
 }
