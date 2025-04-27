@@ -25,12 +25,12 @@ public class Manufacturer {
     private String phoneNumber;
     private String fax;
 
-    @OneToMany(
-        mappedBy = "manufacturer",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
-    private Set<Part> parts = new HashSet<>();
+    // @OneToMany(
+    //     mappedBy = "manufacturer",
+    //     cascade = CascadeType.ALL,
+    //     orphanRemoval = true
+    // )
+    // private Set<Part> parts = new HashSet<>();
 
     // Constructors, getters, setters
     

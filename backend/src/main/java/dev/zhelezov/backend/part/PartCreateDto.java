@@ -1,57 +1,29 @@
 package dev.zhelezov.backend.part;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import dev.zhelezov.backend.car.Car;
 import dev.zhelezov.backend.manufacturer.Manufacturer;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "parts")
-public class Part {
-    @Id
-    @GeneratedValue
-    private UUID id;
-
+public class PartCreateDto {
+    @NotBlank
     private String name;
+    
+    @NotBlank
     private String code;
 
-    @Enumerated(EnumType.STRING)
+    @NotBlank
     private PartCategory category;
 
-    @ManyToMany
-    @JoinTable(
-        name = "part_car_compatibility",
-        joinColumns = @JoinColumn(name = "part_id"),
-        inverseJoinColumns = @JoinColumn(name = "car_id")
-    )
-    private List<Car> supportedCars = new ArrayList<>();
-
+    @NotBlank
     private float buyPrice;
+
+    @NotBlank
     private float sellPrice;
 
-    // @ManyToOne
-    // @JoinColumn(name = "manufacturer_id")
+    // @NotBlank
     // private Manufacturer manufacturer;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -77,14 +49,6 @@ public class Part {
         this.category = category;
     }
 
-    public List<Car> getSupportedCars() {
-        return supportedCars;
-    }
-
-    public void setSupportedCars(List<Car> supportedCars) {
-        this.supportedCars = supportedCars;
-    }
-
     public float getBuyPrice() {
         return buyPrice;
     }
@@ -108,5 +72,4 @@ public class Part {
     // public void setManufacturer(Manufacturer manufacturer) {
     //     this.manufacturer = manufacturer;
     // }
-    
 }
