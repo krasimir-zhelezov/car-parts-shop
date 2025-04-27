@@ -49,7 +49,7 @@ public class CarController {
         @ApiResponse(responseCode = "200", description = "Car found"),
         @ApiResponse(responseCode = "404", description = "Car not found")
     })
-    public ResponseEntity<Car> getMethodName(@PathVariable UUID id) {
+    public ResponseEntity<Car> getCarById(@PathVariable UUID id) {
         return carService.getCarById(id)
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());

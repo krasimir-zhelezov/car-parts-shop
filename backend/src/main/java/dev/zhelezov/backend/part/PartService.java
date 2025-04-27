@@ -1,6 +1,8 @@
 package dev.zhelezov.backend.part;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,9 @@ public class PartService {
     public Part createPart(PartCreateDto dto) {
         Part part = modelMapper.map(dto, Part.class);
         return partRepository.save(part);
+    }
+
+    public Optional<Part> getPartById(UUID id) {
+        return partRepository.findById(id);
     }
 }
