@@ -101,6 +101,10 @@ public class Part {
         this.sellPrice = sellPrice;
     }
 
+    public void addSupportedCar(Car car) {
+        supportedCars.add(car);
+    }
+
     // public Manufacturer getManufacturer() {
     //     return manufacturer;
     // }
