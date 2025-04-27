@@ -63,6 +63,14 @@ public class PartService {
 
         part.addSupportedCar(car);
         return partRepository.save(part);
+    }
 
+    public Part removeSupportedCar(UUID partId, UUID carId) {
+        Part part = partRepository.findById(partId)
+            .orElseThrow(() -> new NoSuchElementException("Part not found"));
+
+        part.removeSupportedCar(carId);
+
+        return partRepository.save(part);
     }
 }

@@ -73,9 +73,16 @@ public class PartController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Part> addSupportedCar(@PathVariable UUID id, @RequestParam UUID carId) {
-        Part part = partService.addSupportedCar(id, carId);
+    @PatchMapping("/{partId}/addSupportedCar/{carId}")
+    public ResponseEntity<Part> addSupportedCar(@PathVariable UUID partId, @PathVariable UUID carId) {
+        Part part = partService.addSupportedCar(partId, carId);
+
+        return ResponseEntity.ok().body(part);
+    }
+
+    @PatchMapping("/{partId}/removeSupportedCar/{carId}")
+    public ResponseEntity<Part> removeSupportedCar(@PathVariable UUID partId, @PathVariable UUID carId) {
+        Part part = partService.removeSupportedCar(partId, carId);
 
         return ResponseEntity.ok().body(part);
     }

@@ -105,6 +105,10 @@ public class Part {
         supportedCars.add(car);
     }
 
+    public void removeSupportedCar(UUID carId) {
+        supportedCars.removeIf(car -> car.getId().equals(carId));
+    }
+
     // public Manufacturer getManufacturer() {
     //     return manufacturer;
     // }
