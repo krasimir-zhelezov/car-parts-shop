@@ -25,7 +25,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/cars")
-@Tag(name = "Car Controller", description = "Operations pertaining for cars")
+@Tag(name = "Car API", description = "Operations pertaining for cars")
 public class CarController {
     private final CarService carService;
     
