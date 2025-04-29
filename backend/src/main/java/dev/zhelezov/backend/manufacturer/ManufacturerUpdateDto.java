@@ -2,7 +2,7 @@ package dev.zhelezov.backend.manufacturer;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class ManufacturerCreateDto {
+public class ManufacturerUpdateDto {
     
     @NotBlank
     private String name;

@@ -31,4 +31,13 @@ public class ManufacturerService {
     public Optional<Manufacturer> getManufacturerById(UUID id) {
         return manufacturerRepository.findById(id);
     }
+
+    public Manufacturer updateManufacturerById(UUID id, ManufacturerUpdateDto dto) {
+        return manufacturerRepository.findById(id)
+            .map(manufacturer -> {
+                modelMapper.map(dto, manufacturer);
+                return manufacturerRepository.save(manufacturer);
+            })
+            .orElse(null);
+    }
 }

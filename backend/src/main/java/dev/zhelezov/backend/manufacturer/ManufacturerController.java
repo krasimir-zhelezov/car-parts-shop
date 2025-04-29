@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
-
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
@@ -49,6 +45,17 @@ public class ManufacturerController {
         return manufacturerService.getManufacturerById(id)
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Manufacturer> updateManufacturerById(@PathVariable UUID id, @RequestBody ManufacturerUpdateDto dto) {
+        Manufacturer manufacturer = manufacturerService.updateManufacturerById(id, dto);
+
+        if (manufacturer != null) {
+            return ResponseEntity.ok().body(manufacturer);
+        }
+
+        return ResponseEntity.notFound().build();
     }
     
 }
