@@ -40,4 +40,13 @@ public class ManufacturerService {
             })
             .orElse(null);
     }
+
+    public boolean deleteManufacturerById(UUID id) {
+        if (manufacturerRepository.existsById(id)) {
+            manufacturerRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
+    }
 }

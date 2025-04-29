@@ -51,7 +51,7 @@ public class PartController {
     
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePartById(@PathVariable UUID id) {
-        if (partService.deleteCarById(id)) {
+        if (partService.deletePartById(id)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
 

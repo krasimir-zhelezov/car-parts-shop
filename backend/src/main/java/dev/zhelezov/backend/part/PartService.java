@@ -37,7 +37,7 @@ public class PartService {
         return partRepository.findById(id);
     }
 
-    public boolean deleteCarById(UUID id) {
+    public boolean deletePartById(UUID id) {
         if (partRepository.existsById(id)) {
             partRepository.deleteById(id);
             return true;
