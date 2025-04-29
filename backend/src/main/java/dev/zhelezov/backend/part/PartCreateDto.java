@@ -1,12 +1,13 @@
 package dev.zhelezov.backend.part;
 
-import java.util.List;
+import java.util.UUID;
 
-import dev.zhelezov.backend.car.Car;
-import dev.zhelezov.backend.manufacturer.Manufacturer;
 import jakarta.validation.constraints.NotBlank;
 
 public class PartCreateDto {
+    // @NotBlank
+    // private UUID manufacturerId;
+
     @NotBlank
     private String name;
     
