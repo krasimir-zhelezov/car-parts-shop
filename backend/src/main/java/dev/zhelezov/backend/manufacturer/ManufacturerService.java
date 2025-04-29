@@ -1,6 +1,8 @@
 package dev.zhelezov.backend.manufacturer;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,9 @@ public class ManufacturerService {
         Manufacturer manufacturer = modelMapper.map(dto, Manufacturer.class);
 
         return manufacturerRepository.save(manufacturer);
+    }
+
+    public Optional<Manufacturer> getManufacturerById(UUID id) {
+        return manufacturerRepository.findById(id);
     }
 }
