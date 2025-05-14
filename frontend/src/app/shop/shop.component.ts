@@ -11,8 +11,11 @@ import { DropdownComponent } from "../shared/components/dropdown/dropdown.compon
 })
 export class ShopComponent {
   partCategories = [
-    { label: 'Edit', value: 'edit' },
-    { label: 'Delete', value: 'delete' },
-    { label: 'Share', value: 'share' }
+    { label: 'All', value: ''},
+    { label: 'Engine', value: 'engine' },
+    { label: 'Tires', value: 'tires' },
+    { label: 'Exhaust', value: 'exhaust' },
+    { label: 'Suspension', value: 'suspension' },
+    { label: 'Brakes', value: 'brakes' }
   ];
 }

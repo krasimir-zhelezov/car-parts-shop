@@ -23,6 +23,10 @@ export class DropdownComponent {
     this.isOpen = false;
     // You can emit an event here if needed
   }
+
+  ngOnInit(): void {
+    this.selectedOption = this.options[0];
+  }
 }
 
 // ng g c shared/components/dropdown --skip-tests --prefix ui
