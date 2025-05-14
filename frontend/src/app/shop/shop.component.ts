@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { InputComponent } from '../shared/components/input/input.component';
 import { ButtonComponent } from "../shared/components/button/button.component";
+import { DropdownComponent } from "../shared/components/dropdown/dropdown.component";
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css',
-  imports: [InputComponent, ButtonComponent]
+  imports: [InputComponent, ButtonComponent, DropdownComponent]
 })
 export class ShopComponent {
-  brands = ['brand1', 'brand2', 'brand3']
-
-  selectedBrand: string = '';
-
-  onBrandSelected(brand: string) {
-    this.selectedBrand = brand;
-  }
+  partCategories = [
+    { label: 'Edit', value: 'edit' },
+    { label: 'Delete', value: 'delete' },
+    { label: 'Share', value: 'share' }
+  ];
 }
