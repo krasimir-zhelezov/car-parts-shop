@@ -49,4 +49,12 @@ public class CarService {
 
         return carRepository.save(car);
     }
+
+    public List<Car> searchCars(String brand, String model) {
+        if (brand == null || model == null) {
+            return carRepository.findByBrandContainingOrModelContaining(brand, model);
+        }
+
+        return carRepository.findByBrandContainingAndModelContaining(brand, model);
+    }
 }

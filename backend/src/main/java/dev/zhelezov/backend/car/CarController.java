@@ -19,6 +19,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -79,4 +81,11 @@ public class CarController {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+    @GetMapping("/search/")
+    public ResponseEntity<List<Car>> searchCars(@RequestParam(required = false) String brand, @RequestParam(required = false) String model) {
+        List<Car> cars = carService.searchCars(brand, model);
+        return ResponseEntity.ok().body(cars);
+    }
+    
 }
