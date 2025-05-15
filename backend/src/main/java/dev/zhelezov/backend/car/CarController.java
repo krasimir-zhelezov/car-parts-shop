@@ -93,4 +93,10 @@ public class CarController {
     public ResponseEntity<Set<String>> searchForBrand(@PathVariable String query) {
         return ResponseEntity.ok().body(carService.searchForBrand(query));
     }
+
+    @GetMapping("search/model/{query}")
+    public ResponseEntity<Set<String>> searchForModel(@RequestParam String brand, @PathVariable String query) {
+        return ResponseEntity.ok().body(carService.searchForModel(brand, query));
+    }
+    
 }

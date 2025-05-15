@@ -70,4 +70,15 @@ public class CarService {
 
         return brands;
     }
+
+    public Set<String> searchForModel(String brand, String query) {
+        Set<String> models = new HashSet<>();
+        List<Car> cars = carRepository.findByBrandContainingAndModelContaining(brand, query);
+
+        for (Car car: cars) {
+            models.add(car.getModel());
+        }
+
+        return models;
+    }
 }
