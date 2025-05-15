@@ -1,7 +1,9 @@
 package dev.zhelezov.backend.car;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
@@ -56,5 +58,16 @@ public class CarService {
         }
 
         return carRepository.findByBrandContainingAndModelContaining(brand, model);
+    }
+
+    public Set<String> searchForBrand(String query) {
+        Set<String> brands = new HashSet<String>();
+        List<Car> cars = carRepository.findByBrandContaining(query);
+
+        for (Car car: cars) {
+            brands.add(car.getBrand());
+        }
+
+        return brands;
     }
 }

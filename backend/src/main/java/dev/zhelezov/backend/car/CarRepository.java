@@ -12,4 +12,5 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
     Optional<Car> findById(UUID id);
     List<Car> findByBrandContainingAndModelContaining(String brand, String model);
     List<Car> findByBrandContainingOrModelContaining(String brand, String model);
+    List<Car> findByBrandContaining(String brand);
 }
