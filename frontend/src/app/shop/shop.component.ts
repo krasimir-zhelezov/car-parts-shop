@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { InputComponent } from '../shared/components/input/input.component';
 import { ButtonComponent } from "../shared/components/button/button.component";
 import { DropdownComponent } from "../shared/components/dropdown/dropdown.component";
+import { ShopService } from '../shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +23,12 @@ export class ShopComponent {
   carBrand: string = '';
   carModel: string = '';
 
+  constructor(private shopService: ShopService) { }
+
   searchForCar() {
-    console.log(this.carBrand, this.carModel);
+    this.shopService.searchForBrand(this.carBrand).subscribe({
+      next: (data) => console.log(data),
+      error: (error) => console.error('Error fetching cars', error),
+    });
   }
 }
