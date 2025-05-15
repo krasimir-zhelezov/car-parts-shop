@@ -18,4 +18,11 @@ export class ShopComponent {
     { label: 'Suspension', value: 'suspension' },
     { label: 'Brakes', value: 'brakes' }
   ];
+
+  carBrand: string = '';
+  carModel: string = '';
+
+  searchForCar() {
+    console.log(this.carBrand, this.carModel);
+  }
 }

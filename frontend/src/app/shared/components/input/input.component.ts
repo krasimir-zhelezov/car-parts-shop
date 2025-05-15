@@ -11,9 +11,11 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() value: string = '';
   @Output() valueChange = new EventEmitter<string>();
+  @Output() input: EventEmitter<any> = new EventEmitter();
 
   onInput(event: Event) {
     this.value = (event.target as HTMLInputElement).value;
     this.valueChange.emit(this.value);
+    this.input.emit();
   }
 }
