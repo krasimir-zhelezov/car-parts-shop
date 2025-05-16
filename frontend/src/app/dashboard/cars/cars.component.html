@@ -1,8 +1,8 @@
 <ui-modal [isOpen]="isAddCarModalOpen" (onClose)="closeAddCarModal()">
-    <form class="flex flex-col gap-4">
-        <ui-input placeholder="Brand"></ui-input>
-        <ui-input placeholder="Model"></ui-input>
-        <ui-input placeholder="Production Year" type="number"></ui-input>
+    <form (ngSubmit)="addCar()" class="flex flex-col gap-4">
+        <ui-input [(ngModel)]="newCarBrand" placeholder="Brand" name="brand"></ui-input>
+        <ui-input [(ngModel)]="newCarModel" placeholder="Model" name="model"></ui-input>
+        <ui-input [(ngModel)]="newCarProductionYear" placeholder="Production Year" type="number" name="productionYear"></ui-input>
         <ui-button>Add</ui-button>
     </form>
 </ui-modal>
