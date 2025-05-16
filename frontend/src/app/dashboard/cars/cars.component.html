@@ -1,4 +1,4 @@
-<ui-modal>
+<ui-modal [isOpen]="isAddCarModalOpen" (onClose)="closeAddCarModal()">
     <form class="flex flex-col gap-4">
         <ui-input placeholder="Brand"></ui-input>
         <ui-input placeholder="Model"></ui-input>
@@ -8,7 +8,7 @@
 </ui-modal>
 
 <div class="flex justify-end m-5">
-    <ui-button>Add</ui-button>
+    <ui-button (click)="openAddCarModal()">Add</ui-button>
 </div>
 
 <div class="flex justify-center m-5">

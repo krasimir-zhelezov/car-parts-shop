@@ -10,5 +10,13 @@ import { InputComponent } from "../../shared/components/input/input.component";
   styleUrl: './cars.component.css'
 })
 export class CarsComponent {
+  isAddCarModalOpen = false;
 
+  openAddCarModal() {
+    this.isAddCarModalOpen = true;
+  }
+
+  closeAddCarModal() {
+    this.isAddCarModalOpen = false;
+  }
 }
