@@ -1,0 +1,18 @@
+<!-- <div class="text-center py-4">
+    <div class="p-4 bg-yellow-400 items-center text-gray-800 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+        <span class="font-semibold mr-2 text-left flex-auto">Get the coolest t-shirts from our brand new store</span>
+    </div>
+</div> -->
+
+<div *ngFor="let alert of alerts" 
+         class="text-center py-4 absolute top-0 left-1/2 transform -translate-x-1/2">
+    <div [ngClass]="{
+           'bg-green-700': alert.type === 'success',
+           'bg-red-700': alert.type === 'error',
+           'bg-yellow-400 text-gray-800': alert.type === 'warning',
+           'bg-blue-400': alert.type === 'info'
+         }"
+         class="p-4 bg-yellow-400 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+        <span class="font-semibold mr-2 text-left flex-auto">{{ alert.message }}</span>
+    </div>
+</div>
