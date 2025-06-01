@@ -1,1 +1,42 @@
-<p>parts works!</p>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Code
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Supported Cars
+        </th>
+        <th>
+            Buy Price
+        </th>
+        <th>
+            Sell Price
+        </th>
+    </tr>
+    <tr *ngFor="let part of parts">
+        <td>
+            {{ part.name }}
+        </td>
+        <td>
+            {{ part.code }}
+        </td>
+        <td>
+            {{ part.category }}
+        </td>
+        <td>
+            {{ part.supportedCars }}
+        </td>
+        <td>
+            {{ part.buyPrice }}
+        </td>
+        <td>
+            {{ part.sellPrice }}
+        </td>
+    </tr>
+</table>
