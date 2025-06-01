@@ -1,42 +1,48 @@
-<table>
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Code
-        </th>
-        <th>
-            Category
-        </th>
-        <th>
-            Supported Cars
-        </th>
-        <th>
-            Buy Price
-        </th>
-        <th>
-            Sell Price
-        </th>
-    </tr>
-    <tr *ngFor="let part of parts">
-        <td>
-            {{ part.name }}
-        </td>
-        <td>
-            {{ part.code }}
-        </td>
-        <td>
-            {{ part.category }}
-        </td>
-        <td>
-            {{ part.supportedCars }}
-        </td>
-        <td>
-            {{ part.buyPrice }}
-        </td>
-        <td>
-            {{ part.sellPrice }}
-        </td>
-    </tr>
-</table>
+<div class="flex justify-center m-5">
+    <table class="table-auto w-1/2 shadow-xl border-separate border border-gray-400 border-spacing-5">
+        <thead class="bg-gray-50 uppercase">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Code
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Supported Cars
+                </th>
+                <th>
+                    Buy Price
+                </th>
+                <th>
+                    Sell Price
+                </th>
+            </tr>
+        </thead>    
+        <tbody>
+            <tr *ngFor="let part of parts">
+                <td>
+                    {{ part.name }}
+                </td>
+                <td>
+                    {{ part.code }}
+                </td>
+                <td>
+                    {{ part.category }}
+                </td>
+                <td>
+                    {{ part.supportedCars }}
+                </td>
+                <td>
+                    {{ part.buyPrice }}
+                </td>
+                <td>
+                    {{ part.sellPrice }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
