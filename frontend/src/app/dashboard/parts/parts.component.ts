@@ -6,10 +6,11 @@ import { ButtonComponent } from "../../shared/components/button/button.component
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { FormsModule } from '@angular/forms';
+import { FormComponent } from '../../shared/components/form/form.component';
 
 @Component({
   selector: 'app-parts',
-  imports: [NgFor, ButtonComponent, ModalComponent, InputComponent, FormsModule],
+  imports: [NgFor, ButtonComponent, ModalComponent, InputComponent, FormsModule, FormComponent],
   templateUrl: './parts.component.html',
   styleUrl: './parts.component.css'
 })
