@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'ui-form',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './form.component.css'
 })
 export class FormComponent {
+  @Output() ngSubmit = new EventEmitter<void>();
 
+  onSubmit() {
+    this.ngSubmit.emit();
+  }
 }
