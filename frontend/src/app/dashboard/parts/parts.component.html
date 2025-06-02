@@ -1,6 +1,17 @@
+<ui-modal [isOpen]="isAddPartModalOpen" (onClose)="closeAddPartModal()">
+    <form (ngSubmit)="addPart()">
+        <ui-input [(ngModel)]="partName" placeholder="Name" name="name"></ui-input>
+        <ui-input [(ngModel)]="partCode" placeholder="Code" name="code"></ui-input>
+        <ui-input [(ngModel)]="partCategory" placeholder="Category" name="category"></ui-input>
+        <ui-input [(ngModel)]="partBuyPrice" placeholder="Buy Price" name="buyPrice"></ui-input>
+        <ui-input [(ngModel)]="partSellPrice" placeholder="Sell Price" name="sellPrice"></ui-input>
+        <ui-button>Add</ui-button>
+    </form>
+</ui-modal>
+
 <div class="flex justify-center m-5">
     <table class="table-auto w-1/2 shadow-xl border-separate border border-gray-400 border-spacing-5">
-        <thead class="bg-gray-50 uppercase">
+        <thead class="uppercase">
             <tr>
                 <th>
                     Name
@@ -19,6 +30,9 @@
                 </th>
                 <th>
                     Sell Price
+                </th>
+                <th>
+                    Actions
                 </th>
             </tr>
         </thead>    
@@ -45,4 +59,8 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="fixed bottom-5 right-5">
+    <ui-button (click)="openAddPartModal()">Add</ui-button>
 </div>
