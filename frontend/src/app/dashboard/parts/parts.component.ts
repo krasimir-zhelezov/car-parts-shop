@@ -7,6 +7,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from '../../shared/components/form/form.component';
+import { AlertService } from '../../shared/components/alert/alert.service';
 
 @Component({
   selector: 'app-parts',
@@ -26,7 +27,7 @@ export class PartsComponent implements OnInit {
   partSellPrice: number = 0;
 
 
-  constructor(private partsService: PartsService) { }
+  constructor(private partsService: PartsService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.loadParts();
@@ -41,7 +42,23 @@ export class PartsComponent implements OnInit {
   }
 
   addPart(): void {
-    console.log(`Adding part ${this.partName}`);
+    const part: Part = {
+      name: this.partName,
+      code: this.partCode,
+      category: this.partCategory,
+      buyPrice: this.partBuyPrice,
+      sellPrice: this.partSellPrice
+    }
+
+    this.partsService.addPart(part).subscribe({
+      next: () => {
+        this.alertService.addAlert({
+          type: 'success',
+          message: 'Part added succesfully.',
+          duration: 5000
+        })
+      }
+    });
   }
 
   openAddPartModal() {

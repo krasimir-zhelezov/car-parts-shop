@@ -9,11 +9,15 @@ import { Part } from '../../models/part.model';
 })
 export class PartsService {
 
-  private baseUrl = environment.apiUrl;
+  private baseUrl = `${environment.apiUrl}/parts/`;
 
   constructor(private http: HttpClient) { }
 
   getAllParts(): Observable<Part[]> {
-    return this.http.get<Part[]>(`${this.baseUrl}/parts/`);
+    return this.http.get<Part[]>(this.baseUrl);
+  }
+
+  addPart(part: Part): Observable<Part> {
+    return this.http.post<Part>(this.baseUrl, part);
   }
 }
