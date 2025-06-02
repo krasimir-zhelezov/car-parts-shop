@@ -3,8 +3,8 @@
         <ui-input [(ngModel)]="partName" placeholder="Name" name="name"></ui-input>
         <ui-input [(ngModel)]="partCode" placeholder="Code" name="code"></ui-input>
         <ui-input [(ngModel)]="partCategory" placeholder="Category" name="category"></ui-input>
-        <ui-input [(ngModel)]="partBuyPrice" placeholder="Buy Price" name="buyPrice"></ui-input>
-        <ui-input [(ngModel)]="partSellPrice" placeholder="Sell Price" name="sellPrice"></ui-input>
+        <ui-input [(ngModel)]="partBuyPrice" placeholder="Buy Price" name="buyPrice" type="number"></ui-input>
+        <ui-input [(ngModel)]="partSellPrice" placeholder="Sell Price" name="sellPrice" type="number"></ui-input>
         <ui-button>Add</ui-button>
     </ui-form>
 </ui-modal>
