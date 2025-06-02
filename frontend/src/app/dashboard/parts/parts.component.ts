@@ -8,10 +8,11 @@ import { InputComponent } from '../../shared/components/input/input.component';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from '../../shared/components/form/form.component';
 import { AlertService } from '../../shared/components/alert/alert.service';
+import { DropdownComponent } from "../../shared/components/dropdown/dropdown.component";
 
 @Component({
   selector: 'app-parts',
-  imports: [NgFor, ButtonComponent, ModalComponent, InputComponent, FormsModule, FormComponent],
+  imports: [NgFor, ButtonComponent, ModalComponent, InputComponent, FormsModule, FormComponent, DropdownComponent],
   templateUrl: './parts.component.html',
   styleUrl: './parts.component.css'
 })
@@ -26,6 +27,14 @@ export class PartsComponent implements OnInit {
   partBuyPrice: number = 0;
   partSellPrice: number = 0;
 
+  partCategories = [
+    { label: 'All', value: ''},
+    { label: 'Engine', value: 'engine' },
+    { label: 'Tires', value: 'tires' },
+    { label: 'Exhaust', value: 'exhaust' },
+    { label: 'Suspension', value: 'suspension' },
+    { label: 'Brakes', value: 'brakes' }
+  ];
 
   constructor(private partsService: PartsService, private alertService: AlertService) { }
 
