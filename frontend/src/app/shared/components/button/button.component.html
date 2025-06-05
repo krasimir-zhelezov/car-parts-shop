@@ -1,1 +1,12 @@
-<button [type]="type" [name]="name" class="outline-1 rounded-xl  text-white bg-blue-500 p-2 shadow hover:bg-blue-400 w-full transition-all"><ng-content></ng-content></button>
+<button 
+    [type]="type" 
+    [name]="name"
+    class="outline-1 rounded-xl text-white p-2 shadow hover:opacity-90 w-full transition-all"
+    [ngClass]="{
+            'bg-blue-500 hover:bg-blue-400': color === 'blue',
+            'bg-yellow-400 hover:bg-yellow-300': color === 'yellow',
+            'bg-red-500 hover:bg-red-400': color === 'red'
+            }">
+      <ng-content></ng-content>
+</button>
+<!--<button [type]="type" [name]="name" class="outline-1 rounded-xl  text-white bg-blue-500 p-2 shadow hover:bg-blue-400 w-full transition-all"><ng-content></ng-content></button>-->

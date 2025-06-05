@@ -1,15 +1,17 @@
-import { Component, ContentChild, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ui-button',
-  imports: [],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.css'
+  imports: [NgClass],
+  styles: []
 })
 export class ButtonComponent {
   @Input() name: string = '';
   @Input() type: string = 'button';
-  @Output() click: EventEmitter<any> = new EventEmitter();
+  @Input() color: string = 'blue';
+  @Output() click = new EventEmitter<void>();
 
   onClick() {
     this.click.emit();

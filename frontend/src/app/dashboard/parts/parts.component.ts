@@ -70,6 +70,18 @@ export class PartsComponent implements OnInit {
     });
   }
 
+  deletePart(partId: string): void {
+    this.partsService.deletePart(partId).subscribe({
+      next: () => {
+        this.alertService.addAlert({
+          type: 'success',
+          message: 'part deleted successfully',
+          duration: 5000
+        })
+      }
+    })
+  }
+
   openAddPartModal() {
     this.isAddPartModalOpen = true;
   }

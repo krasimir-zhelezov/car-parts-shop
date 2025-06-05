@@ -20,4 +20,8 @@ export class PartsService {
   addPart(part: Part): Observable<Part> {
     return this.http.post<Part>(this.baseUrl, part);
   }
+
+  deletePart(id: string): Observable<any> {
+    return this.http.delete(this.baseUrl + id)
+  }
 }
