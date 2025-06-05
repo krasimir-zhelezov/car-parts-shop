@@ -8,6 +8,7 @@ import { Component, ContentChild, ElementRef, EventEmitter, Input, Output } from
 })
 export class ButtonComponent {
   @Input() name: string = '';
+  @Input() type: string = '';
   @Output() click: EventEmitter<any> = new EventEmitter();
 
   onClick() {
