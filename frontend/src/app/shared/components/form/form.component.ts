@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputComponent } from '../input/input.component';
 
 @Component({
   selector: 'ui-form',
@@ -9,7 +11,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class FormComponent {
   @Output() ngSubmit = new EventEmitter<void>();
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    // event.preventDefault();
     this.ngSubmit.emit();
   }
 }

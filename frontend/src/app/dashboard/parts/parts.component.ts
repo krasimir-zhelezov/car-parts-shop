@@ -28,12 +28,11 @@ export class PartsComponent implements OnInit {
   partSellPrice: number = 0;
 
   partCategories = [
-    { label: 'All', value: ''},
-    { label: 'Engine', value: 'engine' },
-    { label: 'Tires', value: 'tires' },
-    { label: 'Exhaust', value: 'exhaust' },
-    { label: 'Suspension', value: 'suspension' },
-    { label: 'Brakes', value: 'brakes' }
+    { label: 'Engine', value: 'ENGINE' },
+    { label: 'Tires', value: 'TIRES' },
+    { label: 'Exhaust', value: 'EXHAUST' },
+    { label: 'Suspension', value: 'SUSPENSION' },
+    { label: 'Brakes', value: 'BRAKES' }
   ];
 
   constructor(private partsService: PartsService, private alertService: AlertService) { }
@@ -51,6 +50,7 @@ export class PartsComponent implements OnInit {
   }
 
   addPart(): void {
+    // console.log(this.partCategory)
     const part: Part = {
       name: this.partName,
       code: this.partCode,
