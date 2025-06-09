@@ -49,6 +49,10 @@ export class PartsComponent implements OnInit {
     })
   }
 
+  private reloadPage(): void {
+    window.location.reload();
+  }
+
   addPart(): void {
     // console.log(this.partCategory)
     const part: Part = {
@@ -80,6 +84,8 @@ export class PartsComponent implements OnInit {
         })
       }
     })
+
+    this.reloadPage();
   }
 
   openAddPartModal() {
