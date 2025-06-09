@@ -24,4 +24,12 @@ export class PartsService {
   deletePart(id: string): Observable<any> {
     return this.http.delete(this.baseUrl + id)
   }
+
+  getPartById(id: string): Observable<Part> {
+    return this.http.get<Part>(this.baseUrl + id);
+  }
+
+  editPart(part: Part): Observable<Part> {
+    return this.http.put<Part>(this.baseUrl + part.id, part);
+  }
 }

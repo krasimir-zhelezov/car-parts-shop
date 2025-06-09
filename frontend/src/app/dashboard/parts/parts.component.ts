@@ -18,8 +18,10 @@ import { DropdownComponent } from "../../shared/components/dropdown/dropdown.com
 })
 export class PartsComponent implements OnInit {
   parts: Part[] = [];
-  isAddPartModalOpen: boolean = false;
+  isPartModalOpen: boolean = false;
+  isEditingPart: boolean = false;
   
+  partId: string = '';
   partName: string = '';
   partCode: string = '';
   partCategory: string = '';
@@ -53,7 +55,7 @@ export class PartsComponent implements OnInit {
     window.location.reload();
   }
 
-  addPart(): void {
+  savePart(): void {
     // console.log(this.partCategory)
     const part: Part = {
       name: this.partName,
@@ -63,15 +65,31 @@ export class PartsComponent implements OnInit {
       sellPrice: this.partSellPrice
     }
 
-    this.partsService.addPart(part).subscribe({
-      next: () => {
-        this.alertService.addAlert({
-          type: 'success',
-          message: 'Part added succesfully.',
-          duration: 5000
-        })
-      }
-    });
+    console.log(this.isEditingPart);
+
+    if (!this.isEditingPart) {
+      this.partsService.addPart(part).subscribe({
+        next: () => {
+          this.alertService.addAlert({
+            type: 'success',
+            message: 'Part added succesfully.',
+            duration: 5000
+          })
+        }
+      });
+    } else {
+      part.id = this.partId;
+      console.log("Part is Edited")
+      this.partsService.editPart(part).subscribe({
+        next: () => {
+          this.alertService.addAlert({
+            type: "success",
+            message: "Part edited successfully",
+            duration: 5000
+          })
+        }
+      })
+    }
   }
 
   deletePart(partId: string): void {
@@ -89,10 +107,37 @@ export class PartsComponent implements OnInit {
   }
 
   openAddPartModal() {
-    this.isAddPartModalOpen = true;
+    this.isPartModalOpen = true;
   }
 
-  closeAddPartModal() {
-    this.isAddPartModalOpen = false;
+  closePartModal() {
+    this.isPartModalOpen = false;
+    this.isEditingPart = false;
+
+    this.partId = '';
+    this.partName = '';
+    this.partCode = '';
+    this.partCategory = '';
+    //supportedCars: Car[];
+    this.partBuyPrice = 0;
+    this.partSellPrice = 0;
+  }
+
+  openEditPartModal(partId: string): void {
+    this.partsService.getPartById(partId).subscribe({
+      next: (part) => {
+        this.partId = part.id ?? '';
+        this.partName = part.name;
+        this.partCode = part.code;
+        this.partCategory = part.category;
+        this.partBuyPrice = part.buyPrice;
+        this.partSellPrice = part.sellPrice;
+      }
+    })
+
+    this.isPartModalOpen = true;
+    this.isEditingPart = true;
+
+    console.log("Open Edit Part Modal " + this.isEditingPart);
   }
 }
