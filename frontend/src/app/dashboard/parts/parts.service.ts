@@ -36,4 +36,8 @@ export class PartsService {
   addSupportedCar(partId: string, carId: string): Observable<Part> {
     return this.http.patch<Part>(`${this.baseUrl}${partId}/addSupportedCar/${carId}`, {});
   }
+
+  removeSupportedCar(partId: string, carId: string): Observable<Part> {
+    return this.http.patch<Part>(`${this.baseUrl}${partId}/removeSupportedCar/${carId}`, {});
+  }
 }

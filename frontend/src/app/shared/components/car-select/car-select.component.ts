@@ -45,7 +45,9 @@ export class CarSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   removeSupportedCar(carId: string) {
-
+    this.partsService.removeSupportedCar(this.partId, carId).subscribe({
+      
+    })
   }
 
   // getSupportedCars(): Car[] | undefined {
