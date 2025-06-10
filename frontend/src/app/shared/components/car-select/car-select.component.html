@@ -1,67 +1,45 @@
-<div class="max-w-md mx-auto p-4 space-y-4">
-  <!-- Accordion Header -->
-  <div 
-    (click)="showSupportedCars = !showSupportedCars"
-    class="flex justify-between items-center p-3 bg-gray-100 rounded cursor-pointer hover:bg-gray-200"
-  >
-    <h3 class="font-medium">Supported Cars</h3>
-    <span>{{ showSupportedCars ? '−' : '+' }}</span>
+<div class="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
+  <!-- Brand Selection -->
+  <div class="mb-4">
+    <label for="brand-select" class="block text-sm font-medium text-gray-700 mb-1">Select Brand</label>
+    <select 
+      id="brand-select" 
+      (change)="filterModelsByBrand($event)"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+    >
+      <option value="" disabled selected>Select a brand</option>
+      <option *ngFor="let brand of getUniqueBrands()" [value]="brand">{{ brand }}</option>
+    </select>
   </div>
 
-  <!-- Accordion Content -->
-  <div *ngIf="showSupportedCars" class="mt-2 space-y-4">
-    <!-- Brand Selection -->
-    <div class="relative">
-      <ui-input 
-        type="text"
-        [(ngModel)]="brandSearch"
-        (input)="filterBrands()"
-        placeholder="Search brand..."
-      />
-      <div *ngIf="filteredBrands.length > 0 && brandSearch" class="absolute z-10 w-full mt-1 bg-white border rounded shadow-lg">
-        <div 
-          *ngFor="let brand of filteredBrands"
-          (click)="selectBrand(brand)"
-          class="p-2 hover:bg-gray-100 cursor-pointer"
-        >
-          {{ brand }}
-        </div>
-      </div>
-    </div>
+  <!-- Model Selection (only shown when brand is selected) -->
+  <div class="mb-4" *ngIf="selectedBrand">
+    <label for="model-select" class="block text-sm font-medium text-gray-700 mb-1">Select Model</label>
+    <select 
+      id="model-select" 
+      (change)="onModelSelect($event)"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+    >
+      <option value="" disabled selected>Select a model</option>
+      <option *ngFor="let car of getModelsByBrand()" [value]="car.id">
+        {{ car.model }} ({{ car.productionYear }})
+      </option>
+    </select>
+  </div>
 
-    <!-- Model Selection (only shown when brand is selected) -->
-    <div *ngIf="selectedBrand" class="relative">
-      <ui-input 
-        type="text"
-        [(ngModel)]="modelSearch"
-        (input)="filterModels()"
-        placeholder="Search model..."
-      />
-      <div *ngIf="filteredModels.length > 0 && modelSearch" class="absolute z-10 w-full mt-1 bg-white border rounded shadow-lg">
-        <div 
-          *ngFor="let model of filteredModels"
-          (click)="selectModel(model)"
-          class="p-2 hover:bg-gray-100 cursor-pointer"
-        >
-          {{ model }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Selected Cars -->
-    <div *ngIf="selectedCars.length > 0" class="mt-4 space-y-2">
-      <div 
-        *ngFor="let car of selectedCars"
-        class="flex justify-between items-center p-2 bg-gray-50 rounded"
-      >
-        <span>{{ car.brand }} {{ car.model }}</span>
+  <!-- Supported Cars List -->
+  <div *ngIf="supportedCars && supportedCars.length > 0" class="mt-6">
+    <h3 class="text-sm font-medium text-gray-700 mb-2">Supported Cars:</h3>
+    <ul class="divide-y divide-gray-200">
+      <li *ngFor="let car of supportedCars" class="py-2 flex justify-between items-center">
+        <span class="text-sm">{{ car.brand }} {{ car.model }} ({{ car.productionYear }})</span>
         <button 
-          (click)="removeCar(car)"
-          class="text-red-500 hover:text-red-700"
+          (click)="car.id && removeSupportedCar(car.id)"
+          class="text-red-500 hover:text-red-700 text-sm font-medium"
         >
-          ×
+          Remove
         </button>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>

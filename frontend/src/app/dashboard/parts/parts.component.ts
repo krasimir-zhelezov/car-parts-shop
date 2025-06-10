@@ -10,6 +10,7 @@ import { FormComponent } from '../../shared/components/form/form.component';
 import { AlertService } from '../../shared/components/alert/alert.service';
 import { DropdownComponent } from "../../shared/components/dropdown/dropdown.component";
 import { CarSelectComponent } from "../../shared/components/car-select/car-select.component";
+import { Car } from '../../models/car.model';
 
 @Component({
   selector: 'app-parts',
@@ -26,7 +27,7 @@ export class PartsComponent implements OnInit {
   partName: string = '';
   partCode: string = '';
   partCategory: string = '';
-  //supportedCars: Car[];
+  supportedCars: Car[] = [];
   partBuyPrice: number = 0;
   partSellPrice: number = 0;
 

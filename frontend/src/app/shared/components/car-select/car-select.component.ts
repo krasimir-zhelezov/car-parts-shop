@@ -1,110 +1,131 @@
+import { PartsService } from './../../../dashboard/parts/parts.service';
 import { NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { Component, EventEmitter, forwardRef, Input, NgModule, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormGroup, FormsModule, NG_VALUE_ACCESSOR, NgModel, Validators } from '@angular/forms';
 import { InputComponent } from '../input/input.component';
 import { Car } from '../../../models/car.model';
 import { CarsService } from '../../../dashboard/cars/cars.service';
+import { Part } from '../../../models/part.model';
+import { Router } from '@angular/router';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'ui-car-select',
-  imports: [FormsModule, NgFor, NgIf, InputComponent],
+  imports: [FormsModule, NgFor, NgIf],
   templateUrl: './car-select.component.html',
-  styleUrl: './car-select.component.css'
+  styleUrl: './car-select.component.css',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CarSelectComponent),
+      multi: true
+    }
+  ]
 })
-export class CarSelectComponent {
-  cars: Car[] = [];
-  carData: {[brand: string]: string[]} = {};
-  
-  brandSearch = '';
-  modelSearch = '';
-  selectedBrand: string | null = null;
-  filteredBrands: string[] = [];
-  filteredModels: string[] = [];
-  selectedCars: Car[] = [];
-  showSupportedCars = false;
+export class CarSelectComponent implements ControlValueAccessor, OnInit {
+  @Input() partId: string = '';
+  cars?: Car[];
+  supportedCars?: Car[];
+  part?: Part;
 
-  constructor(private carsService: CarsService) {}
+  onChange: any = () => {};
+  onTouched: any = () => {};
 
-  ngOnInit() {
-    this.getAllCars();
+  constructor(
+    private carsService: CarsService,
+    private partsService: PartsService,
+  ) { }
+
+  selectCar(carId: string) {
+    this.partsService.addSupportedCar(this.partId, carId).subscribe({
+      next: (part) => {
+        this.part = part;
+      }
+    })
   }
 
-  getAllCars() {
+  removeSupportedCar(carId: string) {
+    
+  }
+
+  // getSupportedCars(): Car[] | undefined {
+  //   return this.part?.supportedCars;
+  // }
+
+  loadCars() {
     this.carsService.getAllCars().subscribe({
       next: (cars) => {
         this.cars = cars;
-        this.processCarData();
-        this.filteredBrands = Object.keys(this.carData);
-      },
-      error: (err) => {
-        console.error('Error fetching cars:', err);
-        // Fallback to default data if API fails
-        this.carData = {
-          'Toyota': ['Corolla', 'Camry', 'Rav4', 'Prius'],
-          'Honda': ['Civic', 'Accord', 'CR-V', 'Pilot'],
-          'Ford': ['F-150', 'Mustang', 'Explorer', 'Focus'],
-          'BMW': ['3 Series', '5 Series', 'X5', 'X3'],
-        };
-        this.filteredBrands = Object.keys(this.carData);
       }
-    });
+    })
   }
 
-  private processCarData() {
-    // Process the API response to create the carData structure
-    this.carData = {};
-    
-    this.cars.forEach(car => {
-      if (!this.carData[car.brand]) {
-        this.carData[car.brand] = [];
+  loadPart() {
+    this.partsService.getPartById(this.partId).subscribe({
+      next: (part) => {
+        this.part = part;
+        this.supportedCars = part.supportedCars
       }
-      if (!this.carData[car.brand].includes(car.model)) {
-        this.carData[car.brand].push(car.model);
-      }
-    });
+    })
   }
 
-  filterBrands() {
-    this.filteredBrands = Object.keys(this.carData).filter(brand =>
-      brand.toLowerCase().includes(this.brandSearch.toLowerCase())
-    );
+  ngOnInit() {
+    this.loadCars();
+    this.loadPart();
   }
 
-  selectBrand(brand: string) {
-    this.selectedBrand = brand;
-    this.brandSearch = brand;
-    this.filteredBrands = [];
-    this.filteredModels = this.carData[brand] || [];
-    this.modelSearch = '';
+  writeValue(value: string): void {
+    this.partId = value;
   }
 
-  filterModels() {
-    if (this.selectedBrand) {
-      this.filteredModels = (this.carData[this.selectedBrand] || []).filter(model =>
-        model.toLowerCase().includes(this.modelSearch.toLowerCase())
-      );
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // Implement if needed
+  }
+
+  // Update model when value changes
+  updateValue(value: string) {
+    this.partId = value;
+    this.onChange(value);
+    this.onTouched();
+  }
+
+  //##########//
+  // DEEPSEEK //
+  //##########//
+
+  selectedBrand: string | null = null;
+  selectedCarId: string | null = null;
+
+  // Get unique brands from cars list
+  getUniqueBrands(): string[] {
+    const brands = new Set(this.cars?.map(car => car.brand));
+    return Array.from(brands).sort();
+  }
+
+  // Filter models by selected brand
+  getModelsByBrand(): Car[] {
+    return this.cars?.filter(car => car.brand === this.selectedBrand) || [];
+  }
+
+  // When brand is selected
+  filterModelsByBrand(event: Event) {
+    this.selectedBrand = (event.target as HTMLSelectElement).value;
+    this.selectedCarId = null;
+  }
+
+  // When model is selected
+  onModelSelect(event: Event) {
+    this.selectedCarId = (event.target as HTMLSelectElement).value;
+    if (this.selectedCarId) {
+      this.selectCar(this.selectedCarId);
     }
-  }
-
-  selectModel(model: string) {
-  if (this.selectedBrand) {
-    const newCar: Car = { 
-      brand: this.selectedBrand, 
-      model,
-      productionYear: 0 // or some default value
-    };
-    if (!this.selectedCars.some(car => 
-      car.brand === newCar.brand && car.model === newCar.model
-    )) {
-      this.selectedCars.push(newCar);
-    }
-    this.modelSearch = '';
-    this.filteredModels = [];
-  }
-}
-  removeCar(carToRemove: Car) {
-    this.selectedCars = this.selectedCars.filter(car => 
-      !(car.brand === carToRemove.brand && car.model === carToRemove.model)
-    );
   }
 }

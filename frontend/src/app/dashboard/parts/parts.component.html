@@ -5,7 +5,7 @@
         <ui-dropdown [(ngModel)]="partCategory" [options]="partCategories"></ui-dropdown>
         <ui-input [(ngModel)]="partBuyPrice" placeholder="Buy Price" name="buyPrice" type="number" step="0.01"></ui-input>
         <ui-input [(ngModel)]="partSellPrice" placeholder="Sell Price" name="sellPrice" type="number" step="0.01"></ui-input>
-        <ui-car-select></ui-car-select>
+        <ui-car-select [(ngModel)]="partId"></ui-car-select>
         <ui-button type="submit">Save</ui-button>
     </ui-form>
 </ui-modal>
