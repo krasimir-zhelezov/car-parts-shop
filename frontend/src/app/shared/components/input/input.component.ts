@@ -17,6 +17,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() value: string = '';
+  @Input() step: string = '';
   @Output() valueChange = new EventEmitter<string>();
 
   // Functions required by ControlValueAccessor
