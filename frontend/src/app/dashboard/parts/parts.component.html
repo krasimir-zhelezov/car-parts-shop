@@ -49,7 +49,9 @@
                     {{ part.category }}
                 </td>
                 <td>
-                    {{ part.supportedCars }}
+                    <p *ngFor="let car of part.supportedCars">
+                        # {{ car.brand }} - {{ car.model }} #
+                    </p>
                 </td>
                 <td>
                     {{ part.buyPrice }}

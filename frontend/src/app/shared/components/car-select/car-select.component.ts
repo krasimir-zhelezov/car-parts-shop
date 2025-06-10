@@ -45,7 +45,7 @@ export class CarSelectComponent implements ControlValueAccessor, OnInit {
   }
 
   removeSupportedCar(carId: string) {
-    
+
   }
 
   // getSupportedCars(): Car[] | undefined {
@@ -128,4 +128,35 @@ export class CarSelectComponent implements ControlValueAccessor, OnInit {
       this.selectCar(this.selectedCarId);
     }
   }
+
+  getAvailableBrands(): string[] {
+  const allBrands = new Set(this.cars?.map(car => car.brand));
+  const supportedBrands = new Set(this.supportedCars?.map(car => car.brand));
+  
+  // Only show brands that have at least one unsupported model
+  return Array.from(allBrands).filter(brand => {
+    const allModelsForBrand = this.cars?.filter(c => c.brand === brand) || [];
+    const supportedModelsForBrand = this.supportedCars?.filter(c => c.brand === brand) || [];
+    return allModelsForBrand.length > supportedModelsForBrand.length;
+  }).sort();
+}
+
+// Get models for selected brand that aren't already supported
+getAvailableModels(): Car[] {
+  if (!this.selectedBrand) return [];
+  
+  const allModels = this.cars?.filter(car => car.brand === this.selectedBrand) || [];
+  const supportedModels = this.supportedCars?.filter(car => car.brand === this.selectedBrand) || [];
+  
+  // Only return models that aren't already supported
+  return allModels.filter(model => 
+    !supportedModels.some(supported => supported.id === model.id)
+  );
+}
+
+// Check if a car is already supported
+isCarSupported(carId: string | undefined): boolean {
+  if (!carId) return false;
+  return this.supportedCars?.some(car => car.id === carId) || false;
+}
 }
