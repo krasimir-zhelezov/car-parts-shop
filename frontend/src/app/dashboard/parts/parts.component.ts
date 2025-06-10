@@ -9,10 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { FormComponent } from '../../shared/components/form/form.component';
 import { AlertService } from '../../shared/components/alert/alert.service';
 import { DropdownComponent } from "../../shared/components/dropdown/dropdown.component";
+import { CarSelectComponent } from "../../shared/components/car-select/car-select.component";
 
 @Component({
   selector: 'app-parts',
-  imports: [NgFor, ButtonComponent, ModalComponent, InputComponent, FormsModule, FormComponent, DropdownComponent],
+  imports: [NgFor, ButtonComponent, ModalComponent, InputComponent, FormsModule, FormComponent, DropdownComponent, CarSelectComponent],
   templateUrl: './parts.component.html',
   styleUrl: './parts.component.css'
 })

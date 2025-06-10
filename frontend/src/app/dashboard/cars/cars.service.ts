@@ -13,12 +13,16 @@ interface Car {
   providedIn: 'root'
 })
 export class CarsService {
-  private apiUrl = `${environment.apiUrl}/cars/`;
+  private baseUrl = `${environment.apiUrl}/cars/`;
 
   constructor(private http: HttpClient) { }
 
   addCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(`${this.apiUrl}`, car);
+    return this.http.post<Car>(`${this.baseUrl}`, car);
+  }
+
+  getAllCars(): Observable<Car[]> {
+    return this.http.get<Car[]>(`${this.baseUrl}`);
   }
 
   // updateCar(id: string, car: Car): Observable<Car> {
