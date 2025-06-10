@@ -49,9 +49,10 @@
                     {{ part.category }}
                 </td>
                 <td>
-                    <p *ngFor="let car of part.supportedCars">
-                        # {{ car.brand }} - {{ car.model }} #
-                    </p>
+                    <div *ngFor="let car of part.supportedCars" class="flex items-center">
+                        <div class="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
+                        <span>{{ car.brand }} - {{ car.model }} ( {{car.productionYear }})</span>
+                    </div>
                 </td>
                 <td>
                     {{ part.buyPrice }}
