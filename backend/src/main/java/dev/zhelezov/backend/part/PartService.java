@@ -58,6 +58,11 @@ public class PartService {
     public Part addSupportedCar(UUID partId, UUID carId) {
         Part part = partRepository.findById(partId)
             .orElseThrow(() -> new NoSuchElementException("Part not found"));
+
+        if (part.hasSupportedCar(carId)) {
+            return part;
+        }
+
         Car car = carRepository.findById(carId)
             .orElseThrow(() -> new NoSuchElementException("Car not found"));
 

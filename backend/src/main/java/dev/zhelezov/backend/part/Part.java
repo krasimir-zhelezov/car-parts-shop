@@ -109,6 +109,10 @@ public class Part {
         supportedCars.removeIf(car -> car.getId().equals(carId));
     }
 
+    public boolean hasSupportedCar(UUID carId) {
+        return supportedCars.stream().anyMatch(car -> car.getId().equals(carId));
+    }
+
     // public Manufacturer getManufacturer() {
     //     return manufacturer;
     // }
