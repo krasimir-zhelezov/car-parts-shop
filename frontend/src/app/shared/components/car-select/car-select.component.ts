@@ -1,6 +1,6 @@
 import { PartsService } from './../../../dashboard/parts/parts.service';
 import { NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Input, NgModule, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, NgModule, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, FormsModule, NG_VALUE_ACCESSOR, NgModel, Validators } from '@angular/forms';
 import { InputComponent } from '../input/input.component';
 import { Car } from '../../../models/car.model';
@@ -25,7 +25,7 @@ import { forkJoin, Observable } from 'rxjs';
 export class CarSelectComponent implements ControlValueAccessor, OnInit {
   @Input() partId: string = '';
   cars?: Car[];
-  supportedCars?: Car[];
+  supportedCars?: Car[] = [];
   part?: Part;
 
   onChange: any = () => {};
@@ -64,14 +64,18 @@ export class CarSelectComponent implements ControlValueAccessor, OnInit {
     this.partsService.getPartById(this.partId).subscribe({
       next: (part) => {
         this.part = part;
-        this.supportedCars = part.supportedCars
+        this.supportedCars = part.supportedCars;
+
+        console.log(this.supportedCars);
       }
     })
   }
 
   ngOnInit() {
     this.loadCars();
-    this.loadPart();
+    // this.loadPart();
+
+    // console.log(this.supportedCars);
   }
 
   writeValue(value: string): void {

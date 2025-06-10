@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Part } from '../../models/part.model';
 import { PartsService } from './parts.service';
 import { NgFor } from '@angular/common';
@@ -19,6 +19,8 @@ import { Car } from '../../models/car.model';
   styleUrl: './parts.component.css'
 })
 export class PartsComponent implements OnInit {
+  @ViewChild(CarSelectComponent) carSelectComponent!: CarSelectComponent;
+
   parts: Part[] = [];
   isPartModalOpen: boolean = false;
   isEditingPart: boolean = false;
@@ -134,8 +136,12 @@ export class PartsComponent implements OnInit {
         this.partCategory = part.category;
         this.partBuyPrice = part.buyPrice;
         this.partSellPrice = part.sellPrice;
+
       }
     })
+
+    this.carSelectComponent.partId = partId;
+    this.carSelectComponent.loadPart();
 
     this.isPartModalOpen = true;
     this.isEditingPart = true;
